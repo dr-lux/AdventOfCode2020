@@ -4,7 +4,7 @@
 #                                                                   #
 #   Author: Titouan "Dr_LuX" Allain                                 #
 #   Date created: 07/12/20 22:00                                    #
-#   Last modification: 08/12/20 20:28                               #
+#   Last modification: 08/12/20 20:40                               #
 #                                                                   #
 #   Thanks to Gouderg for enlightening me about how to take this    #
 #   puzzle.                                                         #
@@ -74,17 +74,12 @@ def main():
                     pos_arg += int(splited_arg[1])
             # Nop statement
             else:
-                # No check statement. We can't check if we can change to a "JMP +0" instruction, it's an infinite loop 
-                if int(splited_arg[1]) == 0:
-                    pos_arg += 1
-                # Check statement
+                # Succes execution with changing this instruction state
+                if check(pos_arg,instruction_list):
+                    pos_arg += int(splited_arg[1])
+                # Failure execution with changing this instruction state
                 else:
-                    # Succes execution with changing this instruction state
-                    if check(pos_arg,instruction_list):
-                        pos_arg += int(splited_arg[1])
-                    # Failure execution with changing this instruction state
-                    else:
-                        pos_arg += 1
+                    pos_arg += 1
             # End statement
             if pos_arg == len(instruction_list):
                 break
